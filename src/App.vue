@@ -9,8 +9,9 @@ const teamStore = useTeamStore()
     <div v-if="teamStore.teams">
       <p>teams {{ teamStore.teams?.length }}</p>
       <div v-for="team in teamStore.teams" :key="team.id">
-        {{ team }}
+          {{ team.name }}
           <br>
+          <p v-if="team.members">{{ team.members.length}}</p>
           <br>
           <br>
       </div>
