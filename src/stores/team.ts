@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import {ref, watchEffect} from 'vue'
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { collection, onSnapshot, query, doc } from 'firebase/firestore'
@@ -9,6 +9,7 @@ export const useTeamStore = defineStore('team', () => {
   const currentTeam = ref()
   const currentSub = ref()
   const q = query(collection(db, 'teams'))
+
   onSnapshot(q, (querySnapshot) => {
     const localTeams: any[] = []
     querySnapshot.forEach((doc) => {
@@ -17,6 +18,10 @@ export const useTeamStore = defineStore('team', () => {
     teams.value = localTeams
   })
 
+  watchEffect(()=>{
+    // Logs when the team is updated
+    console.log("teams",teams)
+  })
   const fetchById = (id: string) => {
     /**
      * check if a subscription exist and unsubscribe it.
