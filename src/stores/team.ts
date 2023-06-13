@@ -43,7 +43,7 @@ export const useTeamStore = defineStore('team', () => {
         const unsub = onSnapshot(doc(db, 'teams', id), (doc) => {
 
             // Set team data value
-            currentTeam.value = {...currentTeam.value, data: doc.data()}
+            currentTeam.value = { data: doc.data()}
         })
 
         // Update the subscription
